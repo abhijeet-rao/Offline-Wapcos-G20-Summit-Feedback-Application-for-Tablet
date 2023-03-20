@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name*"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="50sp" />
+
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your name"
+            android:inputType="text"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="Designation"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="50sp" />
+
+        <EditText
+            android:id="@+id/designationEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your designation"
+            android:inputType="text"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="Organisation"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="50sp" />
+
+        <EditText
+            android:id="@+id/organisationEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your organisation"
+            android:inputType="text"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="Country"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="50sp" />
+
+        <EditText
+            android:id="@+id/countryEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your country"
+            android:inputType="text"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="Mobile number"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="50sp" />
+
+        <EditText
+            android:id="@+id/mobileEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your mobile number"
+            android:inputType="phone"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="Email*"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="50sp" />
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your email address"
+            android:inputType="textEmailAddress"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="Area of Interest* (max 1000 words)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="50sp" />
+
+        <EditText
+            android:id="@+id/areaOfInterestEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Area of Interest"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/remarksTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="Remarks"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="50sp" />
+
+        <EditText
+            android:id="@+id/remarksEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Remarks"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:textSize="30sp" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submitFeedbackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/custom_rectangle"
+            android:paddingStart="60dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="60dp"
+            android:paddingBottom="20dp"
+            android:text="SUBMIT"
+            android:textSize="40sp"
+            app:cornerRadius="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+</ScrollView>

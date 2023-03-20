@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/wapcos_blue" />
+    <corners
+        android:bottomLeftRadius="40dp"
+        android:bottomRightRadius="40dp" />
+    <stroke
+        android:width="4dp"
+        android:color="@color/logoColor"
+        android:dashGap="@dimen/activity_horizontal_margin" />
+</shape>

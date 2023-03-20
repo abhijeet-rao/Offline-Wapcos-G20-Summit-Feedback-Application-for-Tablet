@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/exportButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="40dp"
+        android:backgroundTint="@color/green_500"
+        android:paddingStart="60dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="60dp"
+        android:paddingBottom="20dp"
+        android:text="EXPORT TO EXCEL"
+        android:textSize="35sp"
+        android:translationZ="2dp"
+        app:cornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@android:color/darker_gray" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        style="@style/App.Theme.TextInputLayout"
+        android:backgroundTint="@color/black_overlay"
+        android:hint="Search"
+        android:autofillHints="Search"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:outlineProvider="bounds"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/feedbackRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" />
+
+</LinearLayout>
