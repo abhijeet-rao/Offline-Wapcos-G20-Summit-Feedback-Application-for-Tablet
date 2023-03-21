@@ -129,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
-                android:text="Area of Interest* (max 1000 words)"
+                android:text="Area of Interest*"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="40sp" />
 
@@ -147,7 +147,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
-                android:text="Remarks"
+                android:text="Remarks*"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="40sp" />
 
