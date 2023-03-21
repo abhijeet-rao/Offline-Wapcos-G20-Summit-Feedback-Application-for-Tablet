@@ -1,6 +1,9 @@
 package com.example.wapcosfeedback.fragments;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,9 +28,12 @@ import com.example.wapcosfeedback.R;
 import com.example.wapcosfeedback.adapters.FeedbackListAdapter;
 import com.example.wapcosfeedback.database.FeedbackDbHelper;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -95,63 +101,67 @@ public class FeedbackListFragment extends Fragment {
 
 
     }
-    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 1;
+
+    private static final int REQUEST_CODE_CREATE_DOCUMENT = 2;
+
     private void exportToExcel(List<Feedback> feedbackList) {
-        // Check if permission to write to external storage is granted
-        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            // Request permission to write to external storage
-            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
-            return;
-        }
         if (feedbackList.isEmpty()) {
             Toast.makeText(getActivity(), "No data to export", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String fileName = "feedbacks.csv";
-        File file = new File(requireActivity().getExternalFilesDir(null), fileName);
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("text/csv");
+        intent.putExtra(Intent.EXTRA_TITLE, "feedbacks.csv");
+        startActivityForResult(intent, REQUEST_CODE_CREATE_DOCUMENT);
+    }
 
-        try {
-            FileWriter writer = new FileWriter(file);
-            writer.append("Name,Designation,Organisation,Country,Mobile,Email,Area of Interest,Remarks,Date Time\\n");
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_CREATE_DOCUMENT && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
 
-            for (Feedback feedback : feedbackList) {
-                writer.append(feedback.getName());
-                writer.append(",");
-                writer.append(feedback.getDesignation());
-                writer.append(",");
-                writer.append(feedback.getOrganisation());
-                writer.append(",");
-                writer.append(feedback.getCountry());
-                writer.append(",");
-                writer.append(feedback.getMobile());
-                writer.append(",");
-                writer.append(feedback.getEmail());
-                writer.append(",");
-                writer.append(feedback.getAreaOfInterest());
-                writer.append(",");
-                writer.append(feedback.getRemarks());
-                writer.append(",");
-                writer.append(feedback.getDateTime());
-                writer.append("\n");
-            }
+            // Get all the feedbacks from the database and pass them to the adapter
+            FeedbackDbHelper dbHelper = new FeedbackDbHelper(getContext());
+            ArrayList<Feedback> feedbackList = dbHelper.getAllFeedbacks();
+            feedbackListAdapter.setFeedbackList(feedbackList);
 
-            writer.flush();
-            writer.close();
+            try {
+                ContentResolver resolver = requireActivity().getContentResolver();
+                OutputStream outputStream = resolver.openOutputStream(uri);
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
 
-            Context context = getContext();
-            if (context != null) {
-                Uri contentUri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", file);
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/csv");
-                shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                context.startActivity(Intent.createChooser(shareIntent, "Export feedbacks to CSV"));
-            } else {
+                writer.write("Name,Designation,Organisation,Country,Mobile,Email,Area of Interest,Remarks,Date Time\n");
+
+                for (Feedback feedback : feedbackList) {
+                    writer.write(feedback.getName());
+                    writer.write(",");
+                    writer.write(feedback.getDesignation());
+                    writer.write(",");
+                    writer.write(feedback.getOrganisation());
+                    writer.write(",");
+                    writer.write(feedback.getCountry());
+                    writer.write(",");
+                    writer.write(feedback.getMobile());
+                    writer.write(",");
+                    writer.write(feedback.getEmail());
+                    writer.write(",");
+                    writer.write(feedback.getAreaOfInterest());
+                    writer.write(",");
+                    writer.write(feedback.getRemarks());
+                    writer.write(",");
+                    writer.write(feedback.getDateTime());
+                    writer.write("\n");
+                }
+
+                writer.flush();
+                writer.close();
+
+                Toast.makeText(getActivity(), "Feedbacks exported to CSV", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
                 Toast.makeText(getActivity(), "Error exporting feedbacks to CSV", Toast.LENGTH_SHORT).show();
             }
-        } catch (IOException e) {
-            Toast.makeText(getActivity(), "Error exporting feedbacks to CSV", Toast.LENGTH_SHORT).show();
         }
     }
 

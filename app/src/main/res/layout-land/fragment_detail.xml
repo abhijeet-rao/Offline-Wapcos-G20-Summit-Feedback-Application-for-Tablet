@@ -302,7 +302,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="40dp"
-                        android:background="@drawable/custom_rectangle"
                         android:paddingStart="60dp"
                         android:paddingTop="20dp"
                         android:paddingEnd="60dp"

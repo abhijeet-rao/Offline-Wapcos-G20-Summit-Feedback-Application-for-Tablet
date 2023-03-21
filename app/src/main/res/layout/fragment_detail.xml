@@ -63,7 +63,6 @@
                             android:focusableInTouchMode="false"
                             android:fontFamily="@font/product_sans_regular"
                             android:padding="30dp"
-                            android:text="ABHIJEET"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             android:textSize="30sp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -302,7 +301,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="40dp"
-                        android:background="@drawable/custom_rectangle"
                         android:paddingStart="60dp"
                         android:paddingTop="20dp"
                         android:paddingEnd="60dp"
