@@ -48,7 +48,7 @@ public class DetailFragment extends Fragment {
         TextView emailTextView = view.findViewById(R.id.emailTextView);
         TextView areaOfInterestTextView = view.findViewById(R.id.areaOfInterestTextView);
         TextView remarksTextView = view.findViewById(R.id.remarksTextView);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button backButton = view.findViewById(R.id.backButton);
+        Button backButton = view.findViewById(R.id.backButton);
 
         nameTextView.setText(feedback.getName());
         designationTextView.setText(feedback.getDesignation());

@@ -5,7 +5,8 @@ import android.provider.BaseColumns;
 public final class FeedbackContract {
     // To prevent someone from accidentally instantiating the contract class,
     // make the constructor private.
-    private FeedbackContract() {}
+    private FeedbackContract() {
+    }
 
     /* Inner class that defines the table contents */
     public static class FeedbackEntry implements BaseColumns {

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wapcosfeedback.MainActivity;
 import com.example.wapcosfeedback.Models.Feedback;
 import com.example.wapcosfeedback.R;
 import com.example.wapcosfeedback.adapters.FeedbackListAdapter;
@@ -30,9 +30,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FeedbackListFragment extends Fragment {
     private FeedbackListAdapter feedbackListAdapter;
+    private static final int REQUEST_PERMISSIONS = 1;
     private RecyclerView feedbackRecyclerView;
 
     public FeedbackListFragment() {
@@ -45,7 +47,10 @@ public class FeedbackListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_feedback_list, container, false);
 
-
+        // Request "Storage" permission if it is not granted
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
+        }
         // Initialize SearchView
         SearchView searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -74,7 +79,13 @@ public class FeedbackListFragment extends Fragment {
         FeedbackDbHelper dbHelper = new FeedbackDbHelper(getContext());
         ArrayList<Feedback> feedbackList = dbHelper.getAllFeedbacks();
         feedbackListAdapter.setFeedbackList(feedbackList);
-
+// Initialize back button
+        view.findViewById(R.id.backButton).setOnClickListener(v -> {
+            // Create an intent to go back to MainActivity
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            // Start the activity
+            startActivity(intent);
+        });
 
         // Initialize export button
         view.findViewById(R.id.exportButton).setOnClickListener(v -> exportToExcel(feedbackList));
@@ -84,22 +95,21 @@ public class FeedbackListFragment extends Fragment {
 
 
     }
-
+    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 1;
     private void exportToExcel(List<Feedback> feedbackList) {
         // Check if permission to write to external storage is granted
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // Request permission to write to external storage
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
             return;
         }
-
         if (feedbackList.isEmpty()) {
             Toast.makeText(getActivity(), "No data to export", Toast.LENGTH_SHORT).show();
             return;
         }
 
         String fileName = "feedbacks.csv";
-        File file = new File(getActivity().getExternalFilesDir(null), fileName);
+        File file = new File(requireActivity().getExternalFilesDir(null), fileName);
 
         try {
             FileWriter writer = new FileWriter(file);
@@ -144,8 +154,6 @@ public class FeedbackListFragment extends Fragment {
             Toast.makeText(getActivity(), "Error exporting feedbacks to CSV", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
 
 }

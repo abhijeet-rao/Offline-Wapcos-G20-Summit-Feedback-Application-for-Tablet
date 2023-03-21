@@ -5,6 +5,18 @@ import android.os.Parcelable;
 
 
 public class Feedback implements Parcelable {
+    public static final Creator<Feedback> CREATOR = new Creator<Feedback>() {
+        @Override
+        public Feedback createFromParcel(Parcel in) {
+            return new Feedback(in);
+        }
+
+        @Override
+        public Feedback[] newArray(int size) {
+            return new Feedback[size];
+        }
+    };
+    private final String dateTime;
     private long id;
     private String name;
     private String designation;
@@ -14,7 +26,7 @@ public class Feedback implements Parcelable {
     private String email;
     private String areaOfInterest;
     private String remarks;
-    private String dateTime;
+
 
     public Feedback(long id, String name, String designation, String organisation, String country,
                     String mobile, String email, String areaOfInterest, String remarks, String dateTime) {
@@ -30,7 +42,6 @@ public class Feedback implements Parcelable {
         this.dateTime = dateTime;
     }
 
-
     protected Feedback(Parcel in) {
         id = in.readLong();
         name = in.readString();
@@ -41,20 +52,8 @@ public class Feedback implements Parcelable {
         email = in.readString();
         areaOfInterest = in.readString();
         remarks = in.readString();
-        dateTime= in.readString();
+        dateTime = in.readString();
     }
-
-    public static final Creator<Feedback> CREATOR = new Creator<Feedback>() {
-        @Override
-        public Feedback createFromParcel(Parcel in) {
-            return new Feedback(in);
-        }
-
-        @Override
-        public Feedback[] newArray(int size) {
-            return new Feedback[size];
-        }
-    };
 
     @Override
     public int describeContents() {

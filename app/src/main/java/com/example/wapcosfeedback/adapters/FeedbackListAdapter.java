@@ -25,24 +25,6 @@ public class FeedbackListAdapter extends RecyclerView.Adapter<FeedbackListAdapte
     private static List<Feedback> feedbackList;
     private List<Feedback> feedbackListFull;
     private List<Feedback> filteredList;
-
-    public FeedbackListAdapter(List<Feedback> feedbackList) {
-        this.feedbackList = feedbackList;
-        this.filteredList = new ArrayList<>(feedbackList);
-    }
-
-    // Set the list of feedbacks
-    public void setFeedbackList(List<Feedback> feedbackList) {
-        this.feedbackList = feedbackList;
-        this.filteredList = new ArrayList<>(feedbackList);
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public Filter getFilter() {
-        return feedbackFilter;
-    }
-
     private final Filter feedbackFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -80,6 +62,22 @@ public class FeedbackListAdapter extends RecyclerView.Adapter<FeedbackListAdapte
         }
     };
 
+    public FeedbackListAdapter(List<Feedback> feedbackList) {
+        FeedbackListAdapter.feedbackList = feedbackList;
+        this.filteredList = new ArrayList<>(feedbackList);
+    }
+
+    // Set the list of feedbacks
+    public void setFeedbackList(List<Feedback> feedbackList) {
+        FeedbackListAdapter.feedbackList = feedbackList;
+        this.filteredList = new ArrayList<>(feedbackList);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return feedbackFilter;
+    }
 
     @NonNull
     @Override

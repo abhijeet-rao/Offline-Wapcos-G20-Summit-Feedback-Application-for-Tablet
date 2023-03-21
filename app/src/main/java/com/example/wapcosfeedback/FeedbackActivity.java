@@ -16,6 +16,11 @@ public class FeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
+        // Hide the title bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         Intent intent = getIntent();
         String fragmentType = intent.getStringExtra("fragment");
 

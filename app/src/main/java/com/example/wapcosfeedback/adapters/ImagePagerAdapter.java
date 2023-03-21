@@ -18,10 +18,10 @@ import java.util.logging.LogRecord;
 
 public class ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.ImageViewHolder> {
 
-    private int[] imageIds;
-    private Handler handler;
-    private Runnable runnable;
-    private ViewPager2 imageViewPager;
+    private final int[] imageIds;
+    private final Handler handler;
+    private final Runnable runnable;
+    private final ViewPager2 imageViewPager;
 
     public ImagePagerAdapter(int[] imageIds, ViewPager2 imageViewPager) {
         this.imageIds = imageIds;
@@ -77,6 +77,11 @@ public class ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.Im
         return imageIds.length;
     }
 
+    // Stop the timer when the activity is destroyed
+    public void stopTimer() {
+        handler.removeCallbacks(runnable);
+    }
+
     static class ImageViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
 
@@ -85,10 +90,5 @@ public class ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.Im
             imageView = itemView.findViewById(R.id.imageView);
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         }
-    }
-
-    // Stop the timer when the activity is destroyed
-    public void stopTimer() {
-        handler.removeCallbacks(runnable);
     }
 }
