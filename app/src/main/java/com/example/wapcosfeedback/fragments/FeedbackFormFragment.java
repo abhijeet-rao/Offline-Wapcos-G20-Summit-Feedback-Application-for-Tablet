@@ -192,7 +192,13 @@ public class FeedbackFormFragment extends Fragment {
             }
         });
 
-
+// Initialize back button
+        view.findViewById(R.id.backButton).setOnClickListener(v -> {
+            // Create an intent to go back to MainActivity
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            // Start the activity
+            startActivity(intent);
+        });
         return view;
     }
 

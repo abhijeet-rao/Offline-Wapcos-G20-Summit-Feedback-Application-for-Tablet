@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -163,25 +162,40 @@
                 android:maxLines="5"
                 android:textSize="20sp" />
 
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/submitFeedbackButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginTop="25dp"
+                android:weightSum="2">
 
-                android:paddingStart="60dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="60dp"
-                android:paddingBottom="20dp"
-                android:text="SUBMIT"
-                android:textSize="40sp"
-                app:cornerRadius="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/submitFeedbackButton"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/accept"
+                    android:fontFamily="@font/product_sans_regular"
+                    android:padding="30dp"
+                    android:text="SUBMIT"
+                    android:textSize="30sp"
+                    android:translationZ="5dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/backButton"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/wapcos_blue"
+                    android:fontFamily="@font/product_sans_regular"
+                    android:padding="30dp"
+                    android:text="Back"
+                    android:textSize="30sp"
+                    android:translationZ="5dp" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
