@@ -4,13 +4,19 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -40,12 +46,38 @@ public class FeedbackFormFragment extends Fragment {
         emailEditText = view.findViewById(R.id.emailEditText);
         areaOfInterestEditText = view.findViewById(R.id.areaOfInterestEditText);
         remarksEditText = view.findViewById(R.id.remarksEditText);
+//----------    change color to red of star  of name -------///
+        TextView nameTextView = view.findViewById(R.id.nameTextView);
+        String nameText = "Name*";
+        SpannableString spannableName = new SpannableString(nameText);
+        spannableName.setSpan(new ForegroundColorSpan(Color.RED), nameText.indexOf('*'), nameText.indexOf('*') + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        nameTextView.setText(spannableName);
+//----------    change color to red of star  of Email -------///
+        TextView emailTextView = view.findViewById(R.id.emailTextView);
+        String emailText = "Email*";
+        SpannableString spannableEmail = new SpannableString(emailText);
+        spannableEmail.setSpan(new ForegroundColorSpan(Color.RED), emailText.indexOf('*'), emailText.indexOf('*') + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        emailTextView.setText(spannableEmail);
+
+//----------    change color to red of star  of Area of Interest -------///
+        TextView interestTextView = view.findViewById(R.id.areaOfInterestTextView);
+        String interestText = "Area of Interest*";
+        SpannableString spannableInterest = new SpannableString(interestText);
+        spannableInterest.setSpan(new ForegroundColorSpan(Color.RED), interestText.indexOf('*'), interestText.indexOf('*') + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        interestTextView.setText(spannableInterest);
+
+//----------    change color to red of star  of Remarks -------///
+        TextView remarksTextView = view.findViewById(R.id.remarksTextView);
+        String remarksText = "Remarks*";
+        SpannableString spannableRemarks = new SpannableString(remarksText);
+        spannableRemarks.setSpan(new ForegroundColorSpan(Color.RED), remarksText.indexOf('*'), remarksText.indexOf('*') + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        remarksTextView.setText(spannableRemarks);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feedback_form, container, false);
-
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         dbHelper = new FeedbackDbHelper(getContext());
 
