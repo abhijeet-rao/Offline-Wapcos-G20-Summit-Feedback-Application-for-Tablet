@@ -91,7 +91,6 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:layout_margin="30dp"
-
             android:translationZ="2dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"

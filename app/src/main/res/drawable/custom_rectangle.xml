@@ -5,6 +5,7 @@
         android:bottomLeftRadius="40dp"
         android:bottomRightRadius="40dp" />
     <stroke
-        android:color="@color/logoColor"
+        android:color="@color/green_500"
+        android:width="4dp"
         android:dashGap="@dimen/activity_horizontal_margin" />
 </shape>
