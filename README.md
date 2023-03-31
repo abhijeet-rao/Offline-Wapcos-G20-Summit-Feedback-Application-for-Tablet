@@ -40,7 +40,6 @@ To contribute to the Offline Feedback Application, follow the steps below:
 
 Credits
 
-The Offline Feedback Application was developed by [Abhijeet Rao].
-Hashtags
+The Offline Feedback Application was developed by Abhijeet Rao
 
 #android #tablet #sqlite #excel #feedback #offline #easytouse #opensource #enquiryform #detailform #feedbackform #userdetails
